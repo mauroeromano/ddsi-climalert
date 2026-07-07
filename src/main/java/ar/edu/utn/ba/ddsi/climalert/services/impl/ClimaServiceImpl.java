@@ -25,26 +25,6 @@ public class ClimaServiceImpl implements ClimaService {
     }
 
     @Override
-    public ClimaActual registrarMedicion(
-            String ubicacion,
-            double temperatura,
-            int humedad,
-            String condicion
-    ) {
-        ClimaActual climaActual = new ClimaActual(
-                ubicacion,
-                temperatura,
-                humedad,
-                condicion,
-                LocalDateTime.now()
-        );
-
-        climaRepository.guardar(climaActual);
-
-        return climaActual;
-    }
-
-    @Override
     public void obtenerYRegistrarClimaActual() {
         WeatherApiCurrentResponse response = weatherApiService.obtenerClimaActual();
 
@@ -67,5 +47,24 @@ public class ClimaServiceImpl implements ClimaService {
     @Override
     public List<ClimaActual> obtenerHistorial() {
         return climaRepository.obtenerTodos();
+    }
+
+    private ClimaActual registrarMedicion(
+            String ubicacion,
+            double temperatura,
+            int humedad,
+            String condicion
+    ) {
+        ClimaActual climaActual = new ClimaActual(
+                ubicacion,
+                temperatura,
+                humedad,
+                condicion,
+                LocalDateTime.now()
+        );
+
+        climaRepository.guardar(climaActual);
+
+        return climaActual;
     }
 }

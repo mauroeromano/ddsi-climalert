@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class ClimaScheduler {
 
+    private static final long INTERVALO_CONSULTA_CLIMA = 300000L;
+    private static final long INTERVALO_ANALISIS_ALERTAS = 60000L;
+
     private final ClimaService climaService;
     private final AlertaService alertaService;
     private final EmailService emailService;
@@ -24,12 +27,12 @@ public class ClimaScheduler {
         this.emailService = emailService;
     }
 
-    @Scheduled(fixedRate = 300000)
+    @Scheduled(fixedRate = INTERVALO_CONSULTA_CLIMA)
     public void obtenerYGuardarClimaAutomaticamente() {
         climaService.obtenerYRegistrarClimaActual();
     }
 
-    @Scheduled(fixedRate = 60000)
+    @Scheduled(fixedRate = INTERVALO_ANALISIS_ALERTAS)
     public void analizarAlertasAutomaticamente() {
         Alerta alerta = alertaService.analizarUltimoClima();
 

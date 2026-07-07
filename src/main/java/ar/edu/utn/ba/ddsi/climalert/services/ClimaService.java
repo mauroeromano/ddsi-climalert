@@ -6,13 +6,6 @@ import java.util.List;
 
 public interface ClimaService {
 
-    ClimaActual registrarMedicion(
-            String ubicacion,
-            double temperatura,
-            int humedad,
-            String condicion
-    );
-
     void obtenerYRegistrarClimaActual();
 
     ClimaActual obtenerUltimo();
