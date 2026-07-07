@@ -1,3 +1,8 @@
 spring:
   application:
     name: climalert
+
+weatherapi:
+  base-url: https://api.weatherapi.com/v1
+  key: ${WEATHER_API_KEY:}
+  location: Buenos Aires
